@@ -4,6 +4,7 @@ using LordsExpense.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace LordsExpense.Migrations
 {
     [DbContext(typeof(LordsExpenseDbContext))]
-    partial class LordsExpenseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250523111502_client-id-issue")]
+    partial class clientidissue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,122 +26,6 @@ namespace LordsExpense.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("LordsExpense.EntityFrameworkCore.Category.CategoryEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("PARENT_ID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("USER_ID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PARENT_ID");
-
-                    b.HasIndex("USER_ID");
-
-                    b.ToTable("CATGRY");
-                });
-
-            modelBuilder.Entity("LordsExpense.EntityFrameworkCore.Transaction.TransactionEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CATEGORY_ID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<DateTime>("DATE_TIME")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<decimal>("TRNC_AMOUNT")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("TRNC_TITLE")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TRNC_TYPE")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("USER_ID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CATEGORY_ID");
-
-                    b.HasIndex("USER_ID");
-
-                    b.ToTable("TRASAC");
-                });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
                 {
@@ -1965,47 +1852,6 @@ namespace LordsExpense.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
-            modelBuilder.Entity("LordsExpense.EntityFrameworkCore.Category.CategoryEntity", b =>
-                {
-                    b.HasOne("LordsExpense.EntityFrameworkCore.Category.CategoryEntity", "Parent")
-                        .WithMany("ChildrenEntity")
-                        .HasForeignKey("PARENT_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_CATEGORIES_PARENT_ID");
-
-                    b.HasOne("Volo.Abp.Identity.IdentityUser", "UserId")
-                        .WithMany()
-                        .HasForeignKey("USER_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_CATEGORIES_USER_ID");
-
-                    b.Navigation("Parent");
-
-                    b.Navigation("UserId");
-                });
-
-            modelBuilder.Entity("LordsExpense.EntityFrameworkCore.Transaction.TransactionEntity", b =>
-                {
-                    b.HasOne("LordsExpense.EntityFrameworkCore.Category.CategoryEntity", "Category")
-                        .WithMany("TransactionEntity")
-                        .HasForeignKey("CATEGORY_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_TRASAC_CATEGORY_ID");
-
-                    b.HasOne("Volo.Abp.Identity.IdentityUser", "UserId")
-                        .WithMany()
-                        .HasForeignKey("USER_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_TRASAC_USER_ID");
-
-                    b.Navigation("Category");
-
-                    b.Navigation("UserId");
-                });
-
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
                 {
                     b.HasOne("Volo.Abp.AuditLogging.AuditLog", null)
@@ -2155,13 +2001,6 @@ namespace LordsExpense.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("LordsExpense.EntityFrameworkCore.Category.CategoryEntity", b =>
-                {
-                    b.Navigation("ChildrenEntity");
-
-                    b.Navigation("TransactionEntity");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

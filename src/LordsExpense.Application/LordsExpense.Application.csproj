@@ -11,15 +11,22 @@
   <ItemGroup>
     <ProjectReference Include="..\LordsExpense.Domain\LordsExpense.Domain.csproj" />
     <ProjectReference Include="..\LordsExpense.Application.Contracts\LordsExpense.Application.Contracts.csproj" />
+    <ProjectReference Include="..\LordsExpense.EntityFrameworkCore\LordsExpense.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="9.1.1" />
     <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="9.1.1" />
     <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="9.1.1" />
     <PackageReference Include="Volo.Abp.Account.Application" Version="9.1.1" />
     <PackageReference Include="Volo.Abp.Identity.Application" Version="9.1.1" />
     <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="9.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CashFlow\" />
+    <Folder Include="NetWoth\" />
   </ItemGroup>
 
 </Project>

@@ -14,6 +14,9 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using LordsExpense.EntityFrameworkCore.Transaction;
+using LordsExpense.EntityFrameworkCore.Category;
+using System.Reflection.Emit;
 
 namespace LordsExpense.EntityFrameworkCore;
 
@@ -50,6 +53,8 @@ public class LordsExpenseDbContext :
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
     public DbSet<IdentitySession> Sessions { get; set; }
+    public DbSet<TransactionEntity> TransactionEntity { get; set; }
+    public DbSet<CategoryEntity> CategoryEntity { get; set; }
 
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
@@ -79,7 +84,40 @@ public class LordsExpenseDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureTenantManagement();
         builder.ConfigureBlobStoring();
- 
+        builder.Entity<TransactionEntity>(b =>
+        {
+            b.HasOne(t => t.UserId)
+                .WithMany()
+                .HasForeignKey(t => t.USER_ID)
+                .HasConstraintName("FK_TRASAC_USER_ID")
+                .OnDelete(DeleteBehavior.Restrict);
+            b.Property(x => x.TRNC_AMOUNT)
+            .HasPrecision(18, 2);
+
+            b.HasOne(t => t.Category)
+                .WithMany(c => c.TransactionEntity)
+                .HasForeignKey(t => t.CATEGORY_ID)
+                .HasConstraintName("FK_TRASAC_CATEGORY_ID")
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        builder.Entity<CategoryEntity>(b =>
+        {
+            b.HasOne(c => c.UserId)
+                .WithMany()
+                .HasForeignKey(c => c.USER_ID)
+                .HasConstraintName("FK_CATEGORIES_USER_ID")
+                .OnDelete(DeleteBehavior.Restrict);
+
+            b.HasOne(c => c.Parent)
+                .WithMany(c => c.ChildrenEntity)
+                .HasForeignKey(c => c.PARENT_ID)
+                .HasConstraintName("FK_CATEGORIES_PARENT_ID")
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+
+
 
 
         /* Configure your own tables/entities inside here */

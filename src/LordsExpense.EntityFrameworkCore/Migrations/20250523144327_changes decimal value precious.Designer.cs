@@ -4,6 +4,7 @@ using LordsExpense.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace LordsExpense.Migrations
 {
     [DbContext(typeof(LordsExpenseDbContext))]
-    partial class LordsExpenseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250523144327_changes decimal value precious")]
+    partial class changesdecimalvalueprecious
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
