@@ -15,15 +15,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { APP_ROUTE_PROVIDER } from './route.provider';
 import { DashboardComponent } from './DashBoard/dashboard.component';
 import { LoginComponent } from './Login/login.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { SummaryComponent } from './DashBoard/summary/summary.component';
+import { CashflowComponent } from './DashBoard/cashflow/cashflow.component';
+import { TransactionComponent } from './DashBoard/transactionGrid/transaction.component';
+import { NavbarComponent } from './DashBoard/navbar/navbar.component';
+import { ReportComponent } from './DashBoard/report/report.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, LoginComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, CoreModule],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    CashflowComponent,
+    NavbarComponent,
+    ReportComponent,
+    SummaryComponent,
+    TransactionComponent,
+    LoginComponent,
+  ],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, CoreModule, NgxSpinnerModule],
   providers: [
-    APP_ROUTE_PROVIDER,
     provideAbpCore(
       withOptions({
         environment,

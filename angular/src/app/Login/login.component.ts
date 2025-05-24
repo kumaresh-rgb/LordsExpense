@@ -1,4 +1,3 @@
-// ✅ login.component.ts
 import { Component } from '@angular/core';
 import { AuthService } from '@abp/ng.core';
 import { Router } from '@angular/router';
@@ -7,7 +6,7 @@ import { Router } from '@angular/router';
   standalone: false,
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../login.component.scss'],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
