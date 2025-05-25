@@ -1,0 +1,32 @@
+<!-- Thin, multicolor pipe-style progress bar with custom tooltip -->
+<div class="flex w-full max-w-md h-2 overflow-hidden rounded-lg shadow-inner">
+  <!-- Green segment -->
+  <div class="relative group" [style.width.%]="green">
+    <div class="bg-green-500 h-full hover:bg-green-600 transition-all duration-200"></div>
+    <div
+      class="absolute -top-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+    >
+      {{ green }}%
+    </div>
+  </div>
+
+  <!-- Yellow segment -->
+  <div class="relative group" [style.width.%]="yellow">
+    <div class="bg-yellow-400 h-full hover:bg-yellow-500 transition-all duration-200"></div>
+    <div
+      class="absolute -top-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+    >
+      {{ yellow }}%
+    </div>
+  </div>
+
+  <!-- Red segment -->
+  <div class="relative group" [style.width.%]="red">
+    <div class="bg-red-500 h-full hover:bg-red-600 transition-all duration-200"></div>
+    <div
+      class="absolute -top-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+    >
+      {{ red }}%
+    </div>
+  </div>
+</div>

@@ -30,12 +30,17 @@ import { ReportComponent } from './DashBoard/report/report.component';
     DashboardComponent,
     CashflowComponent,
     NavbarComponent,
-    ReportComponent,
-    SummaryComponent,
-    TransactionComponent,
     LoginComponent,
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, CoreModule, NgxSpinnerModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    CoreModule,
+    NgxSpinnerModule,
+    SummaryComponent,
+    TransactionComponent,
+  ],
   providers: [
     provideAbpCore(
       withOptions({
