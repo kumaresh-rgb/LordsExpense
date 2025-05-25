@@ -25,13 +25,7 @@ import { NavbarComponent } from './DashBoard/navbar/navbar.component';
 import { ReportComponent } from './DashBoard/report/report.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    CashflowComponent,
-    NavbarComponent,
-    LoginComponent,
-  ],
+  declarations: [AppComponent, DashboardComponent, NavbarComponent, LoginComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

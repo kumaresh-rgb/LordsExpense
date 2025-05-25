@@ -1,0 +1,115 @@
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+  <div class="bg-white rounded-2xl shadow-md p-6 border border-slate-200">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Create New Expense</h2>
+    <form
+      name="form"
+      (ngSubmit)="expenseForm.form.valid && save(expenseForm)"
+      #expenseForm="ngForm"
+      class="grid grid-cols-1 gap-6 sm:grid-cols-2"
+    >
+      <div>
+        <label for="title" class="block mb-1 font-medium text-gray-700">Title</label>
+        <input
+          pInputText
+          id="title"
+          [(ngModel)]="expense.title"
+          name="title"
+          required
+          class="w-full"
+        />
+      </div>
+
+      <div>
+        <label for="amount" class="block mb-1 font-medium text-gray-700">Amount</label>
+        <input
+          pInputText
+          type="number"
+          id="amount"
+          [(ngModel)]="expense.amount"
+          name="amount"
+          required
+          class="w-full"
+        />
+      </div>
+
+      <div>
+        <label for="category" class="block mb-1 font-medium text-gray-700">Category</label>
+        <p-dropdown
+          [options]="categories"
+          optionLabel="label"
+          [(ngModel)]="expense.category"
+          name="category"
+          placeholder="Select Category"
+          class="w-full text-1xl font-bold text-slate-800"
+        ></p-dropdown>
+      </div>
+
+      <div>
+        <label for="date" class="block mb-1 font-medium text-gray-700">Date</label>
+
+        <p-datepicker
+          [(ngModel)]="expense.date"
+          [showButtonBar]="true"
+          showIcon="true"
+          inputId="templatedisplay"
+          class="text-1xl font-bold text-slate-800"
+        >
+        </p-datepicker>
+      </div>
+
+      <div>
+        <label for="paymentmode" class="block mb-1 font-medium text-gray-700">Payment Type</label>
+        <p-dropdown
+          [options]="paymentmode"
+          optionLabel="label"
+          [(ngModel)]="expense.paymentmode"
+          name="paymentmode"
+          placeholder="Select PayMode"
+          class="w-full text-1xl font-bold text-slate-800"
+        ></p-dropdown>
+      </div>
+
+      <div>
+        <label for="status" class="block mb-1 font-medium text-gray-700">Status</label>
+        <p-dropdown
+          [options]="status"
+          optionLabel="label"
+          [(ngModel)]="expense.status"
+          name="paymentmode"
+          placeholder="Select status"
+          class="w-full text-1xl font-bold text-slate-800"
+        ></p-dropdown>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="notes" class="block mb-1 font-medium text-gray-700">Notes</label>
+        <textarea
+          pInputTextarea
+          id="notes"
+          [(ngModel)]="expense.notes"
+          name="notes"
+          rows="3"
+          class="w-full"
+        ></textarea>
+      </div>
+
+      <div class="sm:col-span-2 flex flex-wrap justify-end gap-3 mt-4">
+        <button
+          pButton
+          type="button"
+          (onClick)="cancel()"
+          class="mr-2 hidden rounded-lg border-2 px-4 py-2 font-medium text-gray-500 sm:inline focus:outline-none focus:ring hover:bg-gray-200"
+          label="Cancel"
+        ></button>
+        <button
+          pButton
+          type="submit"
+          label="Save"
+          (onClick)="save(expenseForm)"
+          [disabled]="!expenseForm.valid"
+          class="hidden rounded-lg border-2 border-transparent bg-blue-600 px-4 py-2 font-medium text-white sm:inline focus:outline-none focus:ring hover:bg-blue-700"
+        ></button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
-@import "tailwindcss";
+
+/* Optional: Smooth hover for table rows */
+.p-datatable-tbody > tr:hover {
+  background-color: #f9fafb;
+  transition: background-color 0.2s;
+}
+
+/* Optional: Customize paginator if needed */
+
+
 
 :root .lpx-brand-logo {
   --lpx-logo: url('/assets/images/logo/logo-light.svg');

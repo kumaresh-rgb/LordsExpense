@@ -1,20 +1,17 @@
-<!-- Transactions Card -->
-<div class="max-w-6xl mt-10 mx-auto">
-  <div
-    class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border-l-4 border-blue-500"
-  >
-    <div class="flex justify-between items-start">
+<!-- Modern Card Wrapper -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+  <div class="bg-white rounded-2xl shadow-md p-6 border border-slate-200">
+    <!-- Header -->
+    <div class="flex justify-between items-start mb-6">
       <div>
-        <p class="text-2xl font-bold text-slate-800 font-lilita">Transactions</p>
-        <h3 class="text-gray-600 text-sm font-medium">
-          You had 2 incomes and 23 expenses this month
-        </h3>
+        <p class="text-2xl font-bold text-slate-800 font-lilita">Recent Transactions</p>
+        <p class="text-sm text-gray-500">You had 2 incomes and 23 expenses this month</p>
       </div>
+      <p-button label="New" icon="pi pi-plus" (onClick)="openNew()" />
     </div>
-
-    <!-- TableGrid container -->
-    <div class="mt-6 overflow-x-auto">
-      <app-tablegrid></app-tablegrid>
+    <!-- Table Container -->
+    <div class="overflow-x-auto">
+      <app-tablegrid />
     </div>
   </div>
 </div>

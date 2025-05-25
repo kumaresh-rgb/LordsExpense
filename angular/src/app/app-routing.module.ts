@@ -8,6 +8,7 @@ import { SummaryComponent } from './DashBoard/summary/summary.component';
 import { TransactionComponent } from './DashBoard/transactionGrid/transaction.component';
 import { CashflowComponent } from './DashBoard/cashflow/cashflow.component';
 import { ReportComponent } from './DashBoard/report/report.component';
+import { NewExpenseComponent } from './DashBoard/new-expense/new-expense.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'summary', component: SummaryComponent, canActivate: [authGuard] },
   { path: 'cashflow', component: CashflowComponent, canActivate: [authGuard] },
   { path: 'report', component: ReportComponent, canActivate: [authGuard] },
+  { path: 'createNew', component: NewExpenseComponent, canActivate: [authGuard] },
 ];
 
 @NgModule({

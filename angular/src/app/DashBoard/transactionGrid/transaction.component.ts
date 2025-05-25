@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
-import { TableProductsDemo } from '../tablegrid/tablegrid.component';
+import { TablegridComponent } from '../tablegrid/tablegrid.component';
+import { AuthService } from '@abp/ng.core';
+import { Router } from '@angular/router';
 
 interface Country {
   name: string;
@@ -11,7 +13,7 @@ interface Country {
 
 @Component({
   standalone: true,
-  imports: [FormsModule, MultiSelectModule, ButtonModule, TableProductsDemo],
+  imports: [FormsModule, MultiSelectModule, ButtonModule, TablegridComponent],
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
   styleUrl: './transaction.component.scss',
@@ -21,7 +23,7 @@ export class TransactionComponent {
 
   selectedCountries!: Country[];
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
     this.countries = [
       { name: 'Australia', code: 'AU' },
       { name: 'Brazil', code: 'BR' },
@@ -34,5 +36,13 @@ export class TransactionComponent {
       { name: 'Spain', code: 'ES' },
       { name: 'United States', code: 'US' },
     ];
+  }
+
+  openNew() {
+    if (this.authService.isAuthenticated) {
+      this.router.navigate(['/createNew']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }

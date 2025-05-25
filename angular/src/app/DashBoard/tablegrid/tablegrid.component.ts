@@ -23,6 +23,9 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { Table } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
+import { RatingModule } from 'primeng/rating';
+import { TagModule } from 'primeng/tag';
+import { CheckboxModule } from 'primeng/checkbox';
 
 interface Column {
   field: string;
@@ -42,23 +45,21 @@ interface ExportColumn {
   standalone: true,
   imports: [
     TableModule,
-    Dialog,
-    Ripple,
+
     SelectModule,
     ToastModule,
     ToolbarModule,
-    ConfirmDialog,
+
     InputTextModule,
     TextareaModule,
     CommonModule,
-    FileUpload,
     DropdownModule,
     Tag,
-    RadioButton,
+
     Rating,
     InputTextModule,
     FormsModule,
-    InputNumber,
+
     IconFieldModule,
     InputIconModule,
   ],
@@ -73,7 +74,7 @@ interface ExportColumn {
     `,
   ],
 })
-export class TableProductsDemo implements OnInit {
+export class TablegridComponent {
   productDialog: boolean = false;
 
   products!: Product[];
@@ -141,57 +142,9 @@ export class TableProductsDemo implements OnInit {
     this.productDialog = true;
   }
 
-  deleteSelectedProducts() {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected products?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.products = this.products.filter(val => !this.selectedProducts?.includes(val));
-        this.selectedProducts = null;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Products Deleted',
-          life: 3000,
-        });
-      },
-    });
-  }
-
   hideDialog() {
     this.productDialog = false;
     this.submitted = false;
-  }
-
-  deleteProduct(product: Product) {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + product.name + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.products = this.products.filter(val => val.id !== product.id);
-        this.product = {};
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Deleted',
-          life: 3000,
-        });
-      },
-    });
-  }
-
-  findIndexById(id: string): number {
-    let index = -1;
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id === id) {
-        index = i;
-        break;
-      }
-    }
-
-    return index;
   }
 
   createId(): string {
@@ -211,36 +164,6 @@ export class TableProductsDemo implements OnInit {
         return 'warn';
       case 'OUTOFSTOCK':
         return 'danger';
-    }
-  }
-
-  saveProduct() {
-    this.submitted = true;
-
-    if (this.product.name?.trim()) {
-      if (this.product.id) {
-        this.products[this.findIndexById(this.product.id)] = this.product;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Updated',
-          life: 3000,
-        });
-      } else {
-        this.product.id = this.createId();
-        this.product.image = 'product-placeholder.svg';
-        this.products.push(this.product);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Created',
-          life: 3000,
-        });
-      }
-
-      this.products = [...this.products];
-      this.productDialog = false;
-      this.product = {};
     }
   }
 }
